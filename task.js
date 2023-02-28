@@ -25,9 +25,18 @@ let userInput = prompt(menu).toUpperCase().trim();
 //Continues to display the menu until the user selects CLOSE
 while (userInput !== `CLOSE`) {
     if (userInput == 'TASKS') {
-        alert("TASKS")
+        count = 1
+        showTasks = ``
+        for (task of tasks) {
+            showTasks += count + ") " + task + "\n"
+            count++
+        }
+        alert(showTasks)
     } else if (userInput == `NEW`) {
         alert(`NEW`)
+        newTask = prompt(`Enter your new task: `)
+        tasks.push(newTask)
+        alert(`Task "${newTask}" added successfully.`)
     } else if (userInput == `REMOVE`) {
             alert(`REMOVE`)
      }
