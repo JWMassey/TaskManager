@@ -38,19 +38,23 @@ while (userInput !== `CLOSE`) {
             alert(showTasks) 
         }
     } else if (userInput == `NEW`) {
-        newTask = prompt(`Enter your new task: `)
-        repeatCheck = false
-        for (task of tasks) {
-            if (newTask.toUpperCase() == task.toUpperCase()) {
-                repeatCheck = true
-                break;
+        newTask = prompt(`Enter your new task, or BACK to go back: `).trim()
+        if (newTask.toUpperCase() != "BACK") {
+            repeatCheck = false
+            for (task of tasks) {
+                if (newTask.toUpperCase() == task.toUpperCase()) {
+                    repeatCheck = true
+                    break;
+                }
             }
-        }
-        if (repeatCheck) {
-            alert("That task is already on the list.")
-        } else {
-            tasks.push(newTask)
-            alert(`Task "${newTask}" added successfully.`)
+            if (repeatCheck) {
+                alert("That task is already on the list.")
+            } else if (newTask == ""){
+                alert("You can't add a blank task.")
+           } else {
+                tasks.push(newTask)
+                alert(`Task "${newTask}" added successfully.`)
+            }
         }
     } else if (userInput == `REMOVE`) {
         count = 1
@@ -62,13 +66,15 @@ while (userInput !== `CLOSE`) {
         if (tasks.length == 0) {
             alert(`The Tasks list is empty. Use "NEW" to add more tasks.`)
         } else {
-            num = prompt(showTasks + `\nEnter the number of the task you wish to remove: `)
-            while (num != parseInt(num) || num < 1 || num > tasks.length) {
-                num = prompt(showTasks + `\nInvalid Input. Enter the number of the task you wish to remove: `)
+            num = prompt(showTasks + `\nEnter the number of the task you wish to remove, or BACK to go back: `)
+            while (num.toUpperCase() != "BACK" && (num != parseInt(num) || num < 1 || num > tasks.length)) {
+                num = prompt(showTasks + `\nInvalid Input. Enter the number of the task you wish to remove, or -1 to go back: `)
             }
-            num = parseInt(num) - 1
-            removed = tasks.splice(num, 1);
-            alert(`Task "${removed}" removed successfully.`)
+            if (num.toUpperCase() != "BACK") {
+                num = parseInt(num) - 1
+                removed = tasks.splice(num, 1);
+                alert(`Task "${removed}" removed successfully.`)
+            }
         }
     }
     userInput = prompt(menu).toUpperCase().trim();
