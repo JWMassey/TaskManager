@@ -18,6 +18,7 @@ let showTasks = ``; // For displaying tasks to the user
 let newTask; // For storing the value of a new task
 let num; // For storing the number of the task to be removed
 let removed; // For storing the value of the removed task
+let repeatCheck = false //For checking if a task already on the list is input as a new task
 
 //Displays the menu for the user to select an option. Sets response to the userInput variable.
 let userInput = prompt(menu).toUpperCase().trim();
@@ -33,12 +34,28 @@ while (userInput !== `CLOSE`) {
         }
         alert(showTasks)
     } else if (userInput == `NEW`) {
-        alert(`NEW`)
         newTask = prompt(`Enter your new task: `)
-        tasks.push(newTask)
-        alert(`Task "${newTask}" added successfully.`)
+        repeatCheck = false
+        for (task of tasks) {
+            if (newTask.toUpperCase() == task.toUpperCase()) {
+                repeatCheck = true
+                break;
+            }
+        }
+        if (repeatCheck) {
+            alert("That task is already on the list!")
+        } else {
+            tasks.push(newTask)
+            alert(`Task "${newTask}" added successfully.`)
+        }
     } else if (userInput == `REMOVE`) {
-            alert(`REMOVE`)
+        count = 1
+        showTasks = ``
+        for (task of tasks) {
+            showTasks += count + ") " + task + "\n"
+            count++
+        }
+        prompt(showTasks + `\nEnter the number of the task you wish to remove: `)
      }
     userInput = prompt(menu).toUpperCase().trim();
 }
