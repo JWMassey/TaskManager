@@ -68,7 +68,7 @@ while (userInput !== `CLOSE`) {
         } else {
             num = prompt(showTasks + `\nEnter the number of the task you wish to remove, or BACK to go back: `)
             while (num.toUpperCase() != "BACK" && (num != parseInt(num) || num < 1 || num > tasks.length)) {
-                num = prompt(showTasks + `\nInvalid Input. Enter the number of the task you wish to remove, or -1 to go back: `)
+                num = prompt(showTasks + `\nInvalid Input. Enter the number of the task you wish to remove, or BACK to go back: `)
             }
             if (num.toUpperCase() != "BACK") {
                 num = parseInt(num) - 1
